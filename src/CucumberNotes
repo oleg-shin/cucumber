@@ -1,0 +1,144 @@
+Cucumber - it is a tool that supports BDD
+
+    Given - pre condition
+    When - to perform action
+    And - supporting tag
+    Then - expected result/outcome
+
+US - 12345
+
+Given - user is able to open chrome browser
+When - user enters username and password
+And user clicks on login button
+Then user is navigated to dashboard page
+When user clicks on PIM option
+And user click on employee list option
+When user enters name in the employee name field
+And user click on search button
+Then user is able to see the employee
+
+US - 2345 Search employee by id
+
+Given - user is able to open chrome browser
+When - user enters username and password
+And user clicks on login button
+Then user is navigated to dashboard page
+When user clicks on PIM option
+And user click on employee list option
+When user enters id in the employee id field;.
+And user click on search button
+Then user is able to see the employee
+
+-- Cucumbers encourages code re usability concept --
+
+main - the code we write to develop the app, we write under main
+
+test - the code we write to test the app, we write under test
+
+2 thing we have in every project
+    - code - java
+    - non java - files, properties file, excel etc.
+
+ coding will be at one place and non java will be at another place
+
+-- to wrote gherkin scenarios, we use features files
+
+Valid admin login
+Given user is navigated to HRMS application
+When user enters admin username and password
+And clicks on login button
+Then admin user is successfully logged in
+
+scenario - every scenario is considered as one test case
+
+why we don't need system.property() - "driver/chromedriver.exe"
+if the path is incorrect to webdriver - it will fail, path is limited to one machine
+many time it is not compatible with browser
+
+we use webdrivermanager from now on
+
+POM page object model is a design pattern in which we create object repository
+
+-- architecture of framework --
+
+    -- utils - to keep all the utilities of our pproject such as constants, config reader
+            common methods etc to reuse them
+
+    -- steps - all steps definitions can be found under this package for the gherkin steps
+            we used in feature file
+
+    -- pages - POM - to implement object repository and functions.
+
+    -- runner class - we use this class execute all of our test cases
+
+For pre condition and post condition in cucumber we have 2 annotations
+-- Hooks
+
+    -- @Before -- use for pre condition
+    -- @After -- use for post condition
+
+-- hooks should always be mentioned under steps package
+
+--Background vs hooks--
+
+    -- Hooks are applicable to all feature files
+    -- Background is applicable to just one feature file
+
+            -- Hooks execute first then background executes then scenario executes
+
+
+-- cucumber option in runner class --
+    dry run - to quickly get the step definitions
+
+-- whenever we write new scenario in feature file, we must set dryyrun to true
+     for step definition and then put this definition under steps package,
+        after writing the code in it, agin set dryrun to false and execute the script
+
+-- monochrome - when we set it to true, it removes irrelevant information
+    or unreadable character from console while executing cucumber test cases
+
+-- Hooks --
+    pre condition @Before
+    post condition @After
+
+    we must keep hooks class under steps package
+
+-- Background --
+    common steps in a feature file until flow is not broken
+    it is applicable only to feature file, every file can have a different background
+
+-- Tags --
+    to categorize our scenarios for execution
+
+-- data driven testing --
+    when we execute our script against multiple sets of data we call it
+    data driven testing by using "Scenario Outline" feature
+
+-- Data Table --
+
+    examples table - works for complete scenario
+    Data table - it works only for one step
+
+ <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M7</version>
+                <configuration>
+                // we use includes tag to run our runner classes
+                // ** means scr folder
+                /*
+                    <includes>
+                        <include>**/*RunnerClass.java</include>
+                    </includes>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+
+-- generating a report that can have a screenshot in it --
+
+-- we have to add plagin in runner class to capture the details
+test cases during execution and then we use failed runner class

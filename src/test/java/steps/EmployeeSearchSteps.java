@@ -1,0 +1,43 @@
+package steps;
+
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+import pages.DashboardPage;
+import pages.EmployeeInformationPage;
+import utils.CommonMethods;
+
+public class EmployeeSearchSteps extends CommonMethods {
+    @When("user clicks on PIM option")
+    public void user_clicks_on_pim_option() {
+        //DashboardPage dash = new DashboardPage();
+        click(dash.pimOption);
+    }
+
+    @When("user click on employee list option")
+    public void user_click_on_employee_list_option()  {
+        //DashboardPage dash = new DashboardPage();
+        click(dash.employeeListOption);
+    }
+
+    @When("user enters valid employee id")
+    public void user_enters_valid_employee_id() {
+        //EmployeeInformationPage emp = new EmployeeInformationPage();
+        sendText(emp.idEmployeeSearch, "30249233");
+    }
+    @When("user clicks on search button")
+    public void user_clicks_on_search_button() {
+        //EmployeeInformationPage emp = new EmployeeInformationPage();
+        click((emp.searchButton));
+    }
+
+    @Then("user is able to see the employee")
+    public void user_is_able_to_see_the_employee() {
+        // homework - verify the employee is present
+        System.out.println("Employee is available");
+    }
+
+    @When("user enters name of the employee")
+    public void user_enters_name_of_the_employee() {
+        sendText(emp.nameEmployeeSearch, "test");
+    }
+}
